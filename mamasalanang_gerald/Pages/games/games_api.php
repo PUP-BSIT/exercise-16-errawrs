@@ -18,9 +18,13 @@ switch ($action) {
         $genre = $_POST["genre"] ?? null;
         $platform = $_POST["platform"] ?? null;
 
-        if ($game_title && $developer && $release_year && $genre && $platform) {
-            $stmt = mysqli_prepare($conn, "INSERT INTO video_games (game_title, developer, release_year, genre, platform) VALUES (?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "ssiss", $game_title, $developer, $release_year, $genre, $platform);
+        if ($game_title && $developer &&
+              $release_year && $genre && $platform) {
+            $stmt = mysqli_prepare($conn, "INSERT INTO video_games (game_title,
+                  developer, release_year, genre, platform)
+                  VALUES (?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "ssiss", $game_title, $developer,
+                  $release_year, $genre, $platform);
 
             if (mysqli_stmt_execute($stmt)) {
                 echo "New video game added successfully!";
@@ -58,9 +62,13 @@ switch ($action) {
         $genre = $_POST["genre"] ?? null;
         $platform = $_POST["platform"] ?? null;
         
-        if ($original_title && $game_title && $developer && $release_year && $genre && $platform) {
-            $stmt = mysqli_prepare($conn, "UPDATE video_games SET game_title=?, developer=?, release_year=?, genre=?, platform=? WHERE game_title=?");
-            mysqli_stmt_bind_param($stmt, "ssisss", $game_title, $developer, $release_year, $genre, $platform, $original_title);
+        if ($original_title && $game_title && $developer && $release_year &&
+              $genre && $platform) {
+            $stmt = mysqli_prepare($conn, "UPDATE video_games SET game_title=?,
+                  developer=?, release_year=?, genre=?, platform=? 
+                      WHERE game_title=?");
+            mysqli_stmt_bind_param($stmt, "ssisss", $game_title, $developer,
+                  $release_year, $genre, $platform, $original_title);
         
             if (mysqli_stmt_execute($stmt)) {
                 echo "Record updated successfully!";
@@ -77,7 +85,8 @@ switch ($action) {
         $game_title = $data["game_title"] ?? '';
 
         if ($game_title) {
-            $stmt = mysqli_prepare($conn, "DELETE FROM video_games WHERE game_title=?");
+            $stmt = mysqli_prepare($conn, "DELETE FROM video_games
+                  WHERE game_title=?");
             mysqli_stmt_bind_param($stmt, "s", $game_title);
 
             if (mysqli_stmt_execute($stmt)) {

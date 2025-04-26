@@ -14,12 +14,16 @@ function submitData() {
     fetch("games_api.php?action=create", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `game_title=${encodeURIComponent(game_title)}&developer=${encodeURIComponent(developer)}&release_year=${encodeURIComponent(release_year)}&genre=${encodeURIComponent(genre)}&platform=${encodeURIComponent(platform)}`
+        body: `game_title=${encodeURIComponent(game_title)}&developer=
+              ${encodeURIComponent(developer)}&release_year=
+              ${encodeURIComponent(release_year)}&genre=
+              ${encodeURIComponent(genre)}&platform=
+              ${encodeURIComponent(platform)}`
     })
     .then(response => response.text())
     .then(responseText => {
         alert(responseText);
-        form.reset(); // ✅ Reset form after successful submit
+        form.reset();
         fetchGames();
     })
     .catch(error => console.error("Error:", error));
@@ -41,10 +45,12 @@ function fetchGames() {
                 <td>${game.genre}</td>
                 <td>${game.platform}</td>
                 <td>
-                    <button class="edit-btn" onclick="editRow(this)">Edit</button>
+                    <button class="edit-btn" onclick="
+                          editRow(this)">Edit</button>
                 </td>
                 <td>
-                    <button class="delete-btn" onclick="deleteGame('${game.game_title}')">Delete</button>
+                    <button class="delete-btn" onclick="deleteGame
+                          ('${game.game_title}')">Delete</button>
                 </td>
             `;
             gamesList.appendChild(row);
@@ -59,7 +65,8 @@ function editRow(button) {
     const originalData = [];
     for (let i = 0; i < 5; i++) {
         originalData.push(cells[i].innerText);
-        cells[i].innerHTML = `<input type="text" value="${cells[i].innerText}" />`;
+        cells[i].innerHTML =
+              `<input type="text" value="${cells[i].innerText}" />`;
     }
 
     button.style.display = "none";
@@ -92,7 +99,13 @@ function saveRow(row, originalData) {
     fetch("games_api.php?action=update", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `original_title=${encodeURIComponent(originalData[0])}&game_title=${encodeURIComponent(new_title)}&developer=${encodeURIComponent(developer)}&release_year=${encodeURIComponent(release_year)}&genre=${encodeURIComponent(genre)}&platform=${encodeURIComponent(platform)}`
+        body: `original_title=
+              ${encodeURIComponent(originalData[0])}&game_title=
+              ${encodeURIComponent(new_title)}&developer=
+              ${encodeURIComponent(developer)}&release_year=
+              ${encodeURIComponent(release_year)}&genre=
+              ${encodeURIComponent(genre)}&platform=
+              ${encodeURIComponent(platform)}`
     })
     .then(response => response.text())
     .then(responseText => {
