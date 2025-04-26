@@ -2,42 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Library</title>
     <link rel="stylesheet" href="style.css">
-    <title>Video Games CRUD</title>
 </head>
 <body>
     <h1>Video Game Database</h1>
 
     <form id="game_form">
-        <label>Game Title</label>
-        <input id="game_title" required />
-
-        <label>Developer</label>
-        <input id="developer" required />
-
-        <label>Release Year</label>
-        <input id="release_year" type="number" required />
-
-        <label>Genre</label>
-        <input id="genre" required />
-
-        <label>Platform</label>
-        <input id="platform" required />
+        <div class="form-group">
+            <label for="game_title">Game Title</label>
+            <input id="game_title" required />
+        </div>
+        <div class="form-group">
+            <label for="developer">Developer</label>
+            <input id="developer" required />
+        </div>
+        <div class="form-group">
+            <label for="release_year">Release Year</label>
+            <input id="release_year" type="number" required />
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre</label>
+            <input id="genre" required />
+        </div>
+        <div class="form-group">
+            <label for="platform">Platform</label>
+            <input id="platform" required />
+        </div>
 
         <button type="button" onclick="submitData()">Submit New Game</button>
     </form>
 
-    <h2>All Video Games</h2>
+    <h1>All Video Games</h1>
+
     <table id="games_table">
         <thead>
             <tr>
-                <th>Game Title</th>
+                <th>Title</th>
                 <th>Developer</th>
                 <th>Release Year</th>
                 <th>Genre</th>
                 <th>Platform</th>
-                <th>Actions</th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody id="games_list">
