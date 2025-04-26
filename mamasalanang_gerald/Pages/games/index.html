@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Video Games CRUD</title>
+</head>
+<body>
+    <h1>Video Game Database</h1>
+
+    <form id="game_form">
+        <label>Game Title</label>
+        <input id="game_title" required />
+
+        <label>Developer</label>
+        <input id="developer" required />
+
+        <label>Release Year</label>
+        <input id="release_year" type="number" required />
+
+        <label>Genre</label>
+        <input id="genre" required />
+
+        <label>Platform</label>
+        <input id="platform" required />
+
+        <button type="button" onclick="submitData()">Submit New Game</button>
+    </form>
+
+    <h2>All Video Games</h2>
+    <table id="games_table">
+        <thead>
+            <tr>
+                <th>Game Title</th>
+                <th>Developer</th>
+                <th>Release Year</th>
+                <th>Genre</th>
+                <th>Platform</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="games_list">
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
