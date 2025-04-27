@@ -17,8 +17,8 @@ function submitData() {
 
 	fetch(API_URL, {
         method: "POST",
-		headers: {"Content-Type": "application/x-www-form-urlencoded",
-
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
         },
 		body: `song_title=${encodeURIComponent(song_title)}
               &artist_name=${encodeURIComponent(artist_name)}
