@@ -14,11 +14,11 @@ function submitData() {
     fetch("games_api.php?action=create", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `game_title=${encodeURIComponent(game_title)}&developer=
-              ${encodeURIComponent(developer)}&release_year=
-              ${encodeURIComponent(release_year)}&genre=
-              ${encodeURIComponent(genre)}&platform=
-              ${encodeURIComponent(platform)}`
+        body: `game_title=${encodeURIComponent(game_title)}
+              &developer=${encodeURIComponent(developer)}
+              &release_year=${encodeURIComponent(release_year)}
+              &genre=${encodeURIComponent(genre)}
+              &platform=${encodeURIComponent(platform)}`
     })
     .then(response => response.text())
     .then(responseText => {
@@ -45,12 +45,12 @@ function fetchGames() {
                 <td>${game.genre}</td>
                 <td>${game.platform}</td>
                 <td>
-                    <button class="edit-btn" onclick="
-                          editRow(this)">Edit</button>
+                    <button class="edit-btn" onclick="editRow(this)"
+                          data-id="${game.id}">Edit</button>
                 </td>
                 <td>
-                    <button class="delete-btn" onclick="deleteGame
-                          ('${game.game_title}')">Delete</button>
+                    <button class="delete-btn" 
+                          onclick="deleteGame(${game.id})">Delete</button>
                 </td>
             `;
             gamesList.appendChild(row);
@@ -61,6 +61,7 @@ function fetchGames() {
 function editRow(button) {
     const row = button.closest("tr");
     const cells = row.querySelectorAll("td");
+    const gameId = button.getAttribute("data-id");
 
     const originalData = [];
     for (let i = 0; i < 5; i++) {
@@ -74,7 +75,7 @@ function editRow(button) {
     const saveBtn = document.createElement("button");
     saveBtn.className = "edit-btn";
     saveBtn.textContent = "Save";
-    saveBtn.onclick = () => saveRow(row, originalData);
+    saveBtn.onclick = () => saveRow(row, gameId);
 
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "delete-btn";
@@ -85,7 +86,7 @@ function editRow(button) {
     button.parentNode.appendChild(cancelBtn);
 }
 
-function saveRow(row, originalData) {
+function saveRow(row, gameId) {
     const inputs = row.querySelectorAll("input");
     const updatedData = Array.from(inputs).map(input => input.value.trim());
 
@@ -94,18 +95,17 @@ function saveRow(row, originalData) {
         return;
     }
 
-    const [new_title, developer, release_year, genre, platform] = updatedData;
+    const [game_title, developer, release_year, genre, platform] = updatedData;
 
     fetch("games_api.php?action=update", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `original_title=
-              ${encodeURIComponent(originalData[0])}&game_title=
-              ${encodeURIComponent(new_title)}&developer=
-              ${encodeURIComponent(developer)}&release_year=
-              ${encodeURIComponent(release_year)}&genre=
-              ${encodeURIComponent(genre)}&platform=
-              ${encodeURIComponent(platform)}`
+        body: `id=${encodeURIComponent(gameId)}
+              &game_title=${encodeURIComponent(game_title)}
+              &developer=${encodeURIComponent(developer)}
+              &release_year=${encodeURIComponent(release_year)}
+              &genre=${encodeURIComponent(genre)}
+              &platform=${encodeURIComponent(platform)}`
     })
     .then(response => response.text())
     .then(responseText => {
@@ -123,12 +123,15 @@ function cancelEdit(row, originalData) {
     fetchGames();
 }
 
-function deleteGame(game_title) {
-    if (confirm(`Are you sure you want to delete "${game_title}"?`)) {
+function deleteGame(gameId) {
+    const row = event.target.closest("tr");
+    const gameTitle = row.cells[0].innerText;
+    
+    if (confirm(`Are you sure you want to delete "${gameTitle}"?`)) {
         fetch("games_api.php?action=delete", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `game_title=${encodeURIComponent(game_title)}`
+            body: `id=${encodeURIComponent(gameId)}`
         })
         .then(response => response.text())
         .then(responseText => {

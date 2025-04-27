@@ -23,8 +23,8 @@ switch ($action) {
         $genre = $_POST["genre"] ?? null;
         $platform = $_POST["platform"] ?? null;
 
-        if ($game_title && $developer &&
-              $release_year && $genre && $platform) {
+        if ($game_title && $developer && $release_year &&
+              $genre && $platform) {
             $stmt = mysqli_prepare($conn, "INSERT INTO video_game (game_title,
                   developer, release_year, genre, platform)
                   VALUES (?, ?, ?, ?, ?)");
@@ -60,20 +60,20 @@ switch ($action) {
             exit;
         }
         
-        $original_title = $_POST["original_title"] ?? null;
+        $id = $_POST["id"] ?? null;
         $game_title = $_POST["game_title"] ?? null;
         $developer = $_POST["developer"] ?? null;
         $release_year = $_POST["release_year"] ?? null;
         $genre = $_POST["genre"] ?? null;
         $platform = $_POST["platform"] ?? null;
         
-        if ($original_title && $game_title && $developer && $release_year &&
+        if ($id && $game_title && $developer && $release_year &&
               $genre && $platform) {
             $stmt = mysqli_prepare($conn, "UPDATE video_game SET game_title=?,
                   developer=?, release_year=?, genre=?, platform=? 
-                      WHERE game_title=?");
-            mysqli_stmt_bind_param($stmt, "ssisss", $game_title, $developer,
-                  $release_year, $genre, $platform, $original_title);
+                  WHERE id=?");
+            mysqli_stmt_bind_param($stmt, "ssissi", $game_title, $developer,
+                  $release_year, $genre, $platform, $id);
         
             if (mysqli_stmt_execute($stmt)) {
                 echo "Record updated successfully!";
@@ -87,12 +87,11 @@ switch ($action) {
 
     case 'delete':
         parse_str(file_get_contents("php://input"), $data);
-        $game_title = $data["game_title"] ?? '';
+        $id = $data["id"] ?? null;
 
-        if ($game_title) {
-            $stmt = mysqli_prepare($conn, "DELETE FROM video_game
-                  WHERE game_title=?");
-            mysqli_stmt_bind_param($stmt, "s", $game_title);
+        if ($id) {
+            $stmt = mysqli_prepare($conn, "DELETE FROM video_game WHERE id=?");
+            mysqli_stmt_bind_param($stmt, "i", $id);
 
             if (mysqli_stmt_execute($stmt)) {
                 echo "Record deleted successfully!";
@@ -100,7 +99,7 @@ switch ($action) {
                 echo "Error: " . mysqli_error($conn);
             }
         } else {
-            echo "Missing game title!";
+            echo "Missing game ID!";
         }
         break;
 
