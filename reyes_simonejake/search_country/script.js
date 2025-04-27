@@ -3,9 +3,8 @@ let currentPage = 1;
 const countriesPerPage = 8;
 
 function handleSearchKeyPress(event) {
-	if (event.key === "Enter") {
-		searchCountry();
-	}
+    if (event.key !== "Enter") return;
+    searchCountry();
 }
 
 function searchCountry() {
@@ -182,12 +181,11 @@ function renderRegionPage(region) {
 	prevBtn.disabled = currentPage === 1;
 	nextBtn.disabled = currentPage === totalPages;
 
-	prevBtn.onclick = () => {
-		if (currentPage > 1) {
-			currentPage--;
-			renderRegionPage(region);
-		}
-	};
+    prevBtn.onclick = () => {
+        if (!currentPage > 1) return;
+        currentPage--;
+        renderRegionPage(region);
+    };
 	nextBtn.onclick = () => {
 		if (currentPage < totalPages) {
 			currentPage++;
