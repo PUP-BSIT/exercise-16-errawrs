@@ -85,13 +85,12 @@ button:hover {
 /* Grid Layout for Anime List */
 .anime-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px; 
     list-style-type: none;
-    padding: 10px;
-    box-sizing: border-box;
+    padding: 0;
+    margin-bottom: 30px;
 }
-
 .anime-card {
     background: white;
     padding: 20px;
@@ -102,6 +101,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+}
 
 .anime-card:hover {
     transform: translateY(-5px);
@@ -165,6 +165,7 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Show modal class */
 .modal.show-modal {
     display: block;
 }
@@ -230,23 +231,17 @@ button:hover {
     .form-row {
         flex-direction: column;
     }
-    .anime-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (min-width: 321px) and (max-width: 375px) {
     .form-row {
         flex-direction: column;
     }
-    .anime-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (min-width: 376px) and (max-width: 425px) {
     .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: 1fr;
     }
 }
 
@@ -258,7 +253,7 @@ button:hover {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
 }
 
