@@ -1,54 +1,42 @@
-ody {
+body {
     background-color: #f5f5f5;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container {
     display: flex;
     justify-content: center;
-    flex-direction: row-reverse;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #333;
+    font-size: 24px;
 }
 
 h2 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #444;
+    font-size: 20px;
 }
 
-.data-container {
+.data-container, .form-container {
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 20px;
-    width: 930px;
-}
-
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-    width: 600px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.form-container > h2 {
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    max-width: 100%;
 }
 
 .form-field {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    width: 100%;
 }
 
 label {
@@ -58,7 +46,7 @@ label {
 }
 
 #model, #brand, #year, #color {
-    width: 550px;
+    width: 95%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -66,16 +54,19 @@ label {
 
 .form-actions {
     display: flex;
+    flex-direction: column;
     gap: 10px;
+    width: 100%;
 }
 
 button {
-    padding: 8px 15px;
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
@@ -91,15 +82,15 @@ button.delete {
 }
 
 table {
-    width: 900px;
+    width: 100%;
     border-collapse: collapse;
+    font-size: 14px;
 }
 
 table th, table td {
-    padding: 10px;
+    padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    width: 100px;
 }
 
 table th {
@@ -109,58 +100,49 @@ table th {
 .action-buttons {
     display: flex;
     gap: 5px;
+    justify-content: center;
 }
 
-/* Mobile S (max-width: 320px) */
+/* Mobile S   */ 
 @media (max-width: 320px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
     .container {
         flex-direction: column;
         align-items: center;
     }
 
-    .data-container, 
+    .data-container,
     .form-container {
-        width: 90%;
-    }
-
-    #model, #brand, #year, #color {
-        width: 90%;
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+        border-radius: 0;
     }
 
     table {
-        width: 100%;
         font-size: 12px;
     }
 
-    .form-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-    }
-}
-
-/* Mobile M (321px - 375px) */
-@media (min-width: 321px) and (max-width: 375px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .data-container, 
-    .form-container {
-        width: 90%;
+    table th, table td {
+        padding: 6px;
     }
 
     #model, #brand, #year, #color {
-        width: 90%;
-    }
-
-    table {
         width: 100%;
-        font-size: 13px;
+        padding: 6px;
     }
 
     .form-actions {
@@ -169,37 +151,73 @@ table th {
     }
 
     button {
-        width: 100%;
-    }
-}
-
-/* Mobile L (376px - 425px) */
-@media (min-width: 376px) and (max-width: 425px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .data-container, 
-    .form-container {
-        width: 90%;
-    }
-
-    #model, #brand, #year, #color {
-        width: 90%;
-    }
-
-    table {
-        width: 100%;
+        padding: 8px;
         font-size: 14px;
+        width: 100%;
     }
 
-    .form-actions {
+    .action-buttons {
         flex-direction: column;
-        width: 100%;
+        gap: 3px;
     }
+}
 
+/* Mobile M */ 
+@media (min-width: 321px) and (max-width: 375px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 19px; }
+}
+
+/* Mobile L */ 
+@media (min-width: 376px) and (max-width: 425px) {
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+}
+
+/* Tablet */ 
+@media (min-width: 426px) and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .data-container, .form-container {
+        max-width: 700px;
+    }
+    .form-actions {
+        flex-direction: row;
+    }
     button {
-        width: 100%;
+        width: auto;
+    }
+}
+
+/* Laptop */ 
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        flex-direction: row-reverse;
+    }
+    .data-container {
+        max-width: 600px;
+    }
+    .form-container {
+        max-width: 400px;
+    }
+}
+
+/* & Above */ 
+@media (min-width: 1025px) {
+    .container {
+        flex-direction: row-reverse;
+    }
+    .data-container {
+        width: 930px;
+    }
+    .form-container {
+        width: 600px;
+    }
+    .form-actions {
+        flex-direction: row;
+    }
+    button {
+        width: auto;
     }
 }
