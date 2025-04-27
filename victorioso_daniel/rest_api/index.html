@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body onload="getData()">
+        <form id="song_form">
+            <h1>Song List</h1>
+            <div class="title-field">
+                <label>Song Title</label>
+                <input id="song_title"/>
+            </div>
+            <div class="artist-field"><label>Artist Name</label>
+                <input id="artist_name"/>
+            </div>
+            <div class="year-field"><label>Release Year</label>
+                <input id="release_year"/>
+            </div>
+            <div class="genre-field"><label>Genre</label>
+                <input id="genre"/>
+            </div>
+            <div class="writer-field"><label>Song Writer</label>
+                <input id="song_writer"/>
+            </div>
+
+            <button type="button" onclick="submitData()">
+                Submit
+            </button>
+        </form>
+        <div class="table"></div>
+        <script src="script.js"></script>
+    </body>
+</html>
