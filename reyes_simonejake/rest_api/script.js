@@ -14,15 +14,11 @@ function addAnime() {
     };
 
     // Validate input using truthy check
-    if (
-        !anime.title ||
-        !anime.genre ||
-        !anime.episode ||
-        !anime.studio ||
-        !anime.rating)
-    {alert('Please fill all fields');
-        return;}
-
+    if (!anime.title || !anime.genre || !anime.episode ||
+          !anime.studio || !anime.rating) {
+        alert('Please fill all fields');
+        return;
+    }
     fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -46,8 +42,6 @@ function loadAnime() {
         .then((data) => {
             const list = document.getElementById('anime_list');
             list.innerHTML = '';
-
-            // Guard clause with truthy/falsy check
             if (!data || data.length === 0) {
                 const emptyDiv = document.createElement('div');
                 emptyDiv.className = 'empty-list';
@@ -157,14 +151,11 @@ function saveEditChanges() {
         studio: document.getElementById('edit_studio').value,
         rating: document.getElementById('edit_rating').value,
     };
-    if (
-        !updatedAnime.title ||
-        !updatedAnime.genre ||
-        !updatedAnime.episode ||
-        !updatedAnime.studio ||
-        !updatedAnime.rating)
-    {alert('Please fill all fields');
-        return;}
+    if (!updatedAnime.title || !updatedAnime.genre || !updatedAnime.episode ||
+          !updatedAnime.studio || !updatedAnime.rating) {
+        alert('Please fill all fields');
+        return;
+    }
 
     fetch(apiUrl, {
         method: 'PATCH',

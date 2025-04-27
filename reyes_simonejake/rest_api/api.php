@@ -25,8 +25,8 @@ $connection = new mysqli(
 if ($connection->connect_error) {
     http_response_code(500);
     echo json_encode([
-        'status' => 'error',
-        'message' => 'Connection failed: ' . $connection->connect_error
+          'status' => 'error',
+          'message' => 'Connection failed: ' . $connection->connect_error
     ]);
     exit;
 }
@@ -108,7 +108,7 @@ function addAnime($connection, $inputData)
     }
 
     $query = "INSERT INTO anime (title, genre, episode, studio, rating) 
-                    VALUES (?, ?, ?, ?, ?)";
+          VALUES (?, ?, ?, ?, ?)";
     $statement = $connection->prepare($query);
     
     if (!$statement) {
@@ -123,12 +123,12 @@ function addAnime($connection, $inputData)
     $rating = $inputData['rating'];
 
     $statement->bind_param(
-            "ssiss", 
-            $title, 
-            $genre, 
-            $episode, 
-            $studio, 
-            $rating
+          "ssiss", 
+          $title, 
+          $genre, 
+          $episode, 
+          $studio, 
+          $rating
     );
     
     if ($statement->execute()) {
@@ -211,15 +211,14 @@ function updateAnime($connection, $inputData)
     
     $checkStatement->close();
     $query = "UPDATE anime SET title = ?, genre = ?, episode = ?, 
-                    studio = ?, rating = ? WHERE id = ?";
+          studio = ?, rating = ? WHERE id = ?";
     $statement = $connection->prepare($query);
     
     if (!$statement) {
         sendError(500, 'Database update preparation failed');
         return;
     }
-    
-    // Extract and sanitize form data
+
     $title = trim($inputData['title']);
     $genre = trim($inputData['genre']);
     $episode = intval($inputData['episode']);
@@ -228,13 +227,13 @@ function updateAnime($connection, $inputData)
     
     // Bind parameters and execute update
     $statement->bind_param(
-            "ssissi", 
-            $title, 
-            $genre, 
-            $episode, 
-            $studio, 
-            $rating, 
-            $animeId
+          "ssissi", 
+          $title, 
+          $genre, 
+          $episode, 
+          $studio, 
+          $rating, 
+          $animeId
     );
     
     if ($statement->execute()) {
@@ -263,23 +262,21 @@ function validateAnime($inputData)
         }
     }
     
-    if (empty(trim($inputData['title'])) || 
-        empty(trim($inputData['genre'])) || 
-        empty(trim($inputData['studio']))) {
+    if (empty(trim($inputData['title'])) || empty(trim($inputData['genre'])) || 
+          empty(trim($inputData['studio']))) {
         return false;
     }
     
     if (!is_numeric($inputData['episode']) || 
-              intval($inputData['episode']) < 0) {
+          intval($inputData['episode']) < 0) {
         return false;
     }
     
     if (!is_numeric($inputData['rating']) || 
-        floatval($inputData['rating']) < 0 || 
-        floatval($inputData['rating']) > 10) {
+          floatval($inputData['rating']) < 0 || 
+          floatval($inputData['rating']) > 10) {
         return false;
     }
-    
     return true;
 }
 
