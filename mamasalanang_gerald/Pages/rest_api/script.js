@@ -1,3 +1,6 @@
+const api =
+      "https://www.stackovercash.site/exercise_16/mamasalanang/games_api.php"
+
 function submitData() {
     const form = document.getElementById("game_form");
     const game_title = document.querySelector("#game_title").value.trim();
@@ -11,7 +14,7 @@ function submitData() {
         return;
     }
 
-    fetch("games_api.php?action=create", {
+    fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `game_title=${encodeURIComponent(game_title)}
@@ -30,7 +33,7 @@ function submitData() {
 }
 
 function fetchGames() {
-    fetch("games_api.php?action=read")
+    fetch(api)
     .then(response => response.json())
     .then(games => {
         const gamesList = document.getElementById("games_list");
@@ -97,7 +100,7 @@ function saveRow(row, gameId) {
 
     const [game_title, developer, release_year, genre, platform] = updatedData;
 
-    fetch("games_api.php?action=update", {
+    fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `id=${encodeURIComponent(gameId)}
@@ -128,7 +131,7 @@ function deleteGame(gameId) {
     const gameTitle = row.cells[0].innerText;
     
     if (confirm(`Are you sure you want to delete "${gameTitle}"?`)) {
-        fetch("games_api.php?action=delete", {
+        fetch(api, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: `id=${encodeURIComponent(gameId)}`
