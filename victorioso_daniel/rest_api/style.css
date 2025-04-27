@@ -1,0 +1,324 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #333;
+}
+
+#song_form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.title-field, .artist-field, .year-field, .genre-field, .writer-field {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #444;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3a7bc8;
+}
+
+.table {
+    overflow-x: auto;
+    width: 100%;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #4a90e2;
+    color: white;
+}
+
+th {
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+tr.editing {
+    background-color: #ffe8e8 !important;
+    transition: background-color 0.3s;
+}
+
+tr.editing td {
+    border-bottom: 1px solid #ffcdcd;
+}
+
+[contenteditable="true"] {
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+[contenteditable="true"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.action button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.action button:nth-child(1) {
+    background-color: #4a90e2;
+}
+
+.action button:nth-child(2) {
+    background-color: #e74c3c;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.expand-row {
+    background-color: #f0f5ff;
+    cursor: pointer;
+    text-align: center;
+    color: #4a90e2;
+    font-weight: 500;
+}
+
+.expand-row:hover {
+    background-color: #e0eaff;
+}
+
+.hidden-data {
+    display: none;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.hidden-data.visible {
+    display: table-row;
+}
+
+.hidden-data td {
+    padding: 12px 15px;
+}
+
+.hidden-data-label {
+    font-weight: 600;
+    color: #444;
+    margin-right: 10px;
+}
+
+@media (max-width: 425px) {
+    body {
+        padding: 10px;
+    }
+    
+    #song_form {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    input {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 8px 12px;
+        font-size: 14px;
+        width: 100%;
+    }
+    
+    .table {
+        width: 100%;
+        margin: 0;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+    
+    .action button {
+        padding: 4px 6px;
+        font-size: 12px;
+        margin: 2px;
+    }
+    
+    /* Hide genre and songwriter columns */
+    th:nth-child(4), 
+    td:nth-child(4), 
+    th:nth-child(5), 
+    td:nth-child(5) {
+        display: none;
+    }
+    
+    /* Add view more button */
+    td.more-info {
+        text-align: center;
+        padding: 5px;
+    }
+    
+    .view-more-btn {
+        background-color: #f0f5ff;
+        color: #4a90e2;
+        border: 1px solid #d0e0ff;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    body {
+        padding: 5px;
+    }
+    
+    #song_form {
+        padding: 12px;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    #song_form {
+        padding: 20px;
+    }
+    
+    input {
+        padding: 10px;
+        font-size: 15px;
+    }
+    
+    button {
+        padding: 9px 15px;
+        font-size: 15px;
+    }
+    
+    th, td {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .action button {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 25px;
+    }
+    
+    #song_form {
+        padding: 22px;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    th, td {
+        padding: 14px;
+    }
+}
+
+@media (min-width: 1025px) {
+    body {
+        padding: 30px;
+    }
+    
+    #song_form {
+        padding: 25px;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    table {
+        max-width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
