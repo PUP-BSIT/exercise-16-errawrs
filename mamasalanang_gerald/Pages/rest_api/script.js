@@ -1,5 +1,5 @@
 const api =
-	"https://www.stackovercash.site/exercise_16/mamasalanang/games_api.php";
+      "https://www.stackovercash.site/exercise_16/mamasalanang/games_api.php";
 
 function submitData() {
 	const form = document.getElementById("game_form");
@@ -14,27 +14,35 @@ function submitData() {
 		return;
 	}
 
-	const formData = new FormData();
+	const formData = new URLSearchParams();
 	formData.append("game_title", game_title);
 	formData.append("developer", developer);
 	formData.append("release_year", release_year);
 	formData.append("genre", genre);
 	formData.append("platform", platform);
+	formData.append("action", "create");
 
 	fetch(api, {
 		method: "POST",
-		body: formData,
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: formData.toString(),
 	})
 		.then((response) => {
 			if (!response.ok) {
-				throw new Error(
-					"Network response was not ok: " + response.statusText
-				);
+				throw new Error("Network response was not ok: "
+                      + response.statusText);
 			}
-			return response.json();
+			return response.text();
 		})
 		.then((data) => {
-			alert(data.message || data.error || "Operation completed");
+			try {
+				const jsonData = JSON.parse(data);
+				alert(jsonData.message || "Operation completed");
+			} catch (e) {
+				alert(data || "Operation completed");
+			}
 			form.reset();
 			fetchGames();
 		})
@@ -45,49 +53,64 @@ function submitData() {
 }
 
 function fetchGames() {
-	fetch(api)
+	fetch(api + "?action=read")
 		.then((response) => {
 			if (!response.ok) {
-				throw new Error(
-					"Network response was not ok: " + response.statusText
-				);
+				throw new Error("Network response was not ok: "
+                      + response.statusText);
 			}
-			return response.json();
+			return response.text();
 		})
-		.then((games) => {
-			const gamesList = document.getElementById("games_list");
-			gamesList.innerHTML = "";
+		.then((data) => {
+			try {
+				const games = JSON.parse(data);
+				const gamesList = document.getElementById("games_list");
+				gamesList.innerHTML = "";
 
-			if (!Array.isArray(games)) {
-				console.error("Expected an array but got:", games);
-				return;
+				if (!Array.isArray(games)) {
+					console.error("Expected an array but got:", games);
+					gamesList.innerHTML =
+						"<tr><td colspan='7'>No games found</td></tr>";
+					return;
+				}
+
+				if (games.length === 0) {
+					gamesList.innerHTML =
+						"<tr><td colspan='7'>No games found</td></tr>";
+					return;
+				}
+
+				games.forEach((game) => {
+					const row = document.createElement("tr");
+					row.innerHTML = `
+						<td>${game.game_title || ""}</td>
+						<td>${game.developer || ""}</td>
+						<td>${game.release_year || ""}</td>
+						<td>${game.genre || ""}</td>
+						<td>${game.platform || ""}</td>
+						<td>
+							<button class="edit-btn" onclick="editRow(this)"
+                                  data-id="${game.id}">Edit</button>
+						</td>
+						<td>
+							<button class="delete-btn" onclick="deleteGame
+                                  (${game.id})">Delete</button>
+						</td>
+					`;
+					gamesList.appendChild(row);
+				});
+			} catch (e) {
+				console.error("Error parsing JSON:", e);
+				document.getElementById("games_list").innerHTML = 
+					`<tr><td colspan="7">Error parsing data:
+                          ${e.message}</td></tr>`;
 			}
-
-			games.forEach((game) => {
-				const row = document.createElement("tr");
-				row.innerHTML = `
-                <td>${game.game_title || ""}</td>
-                <td>${game.developer || ""}</td>
-                <td>${game.release_year || ""}</td>
-                <td>${game.genre || ""}</td>
-                <td>${game.platform || ""}</td>
-                <td>
-                    <button class="edit-btn" onclick="editRow(this)" 
-                          data-id="${game.id}">Edit</button>
-                </td>
-                <td>
-                    <button class="delete-btn" data-id="
-                          ${game.id}">Delete</button>
-                </td>
-            `;
-				gamesList.appendChild(row);
-			});
 		})
 		.catch((error) => {
 			console.error("Error fetching games:", error);
-			document.getElementById("games_list").innerHTML =
-                  `<tr><td colspan="7">Error loading games: 
-                  ${error.message}</td></tr>`;
+			document.getElementById("games_list").innerHTML = 
+				`<tr><td colspan="7">Error loading games:
+                      ${error.message}</td></tr>`;
 		});
 }
 
@@ -100,10 +123,8 @@ function editRow(button) {
 	for (let i = 0; i < 5; i++) {
 		const text = cells[i].innerText;
 		originalData.push(text);
-		cells[i].innerHTML = `<input type="text" value="${text.replace(
-			/"/g,
-			"&quot;"
-		)}" />`;
+		cells[i].innerHTML = `<input type="text" value="
+              ${text.replace(/"/g, "&quot;")}" />`;
 	}
 
 	button.style.display = "none";
@@ -133,29 +154,36 @@ function saveRow(row, gameId) {
 
 	const [game_title, developer, release_year, genre, platform] = updatedData;
 
-	// Create FormData object
-	const formData = new FormData();
+	const formData = new URLSearchParams();
 	formData.append("id", gameId);
 	formData.append("game_title", game_title);
 	formData.append("developer", developer);
 	formData.append("release_year", release_year);
 	formData.append("genre", genre);
 	formData.append("platform", platform);
+	formData.append("action", "update");
 
 	fetch(api, {
 		method: "POST",
-		body: formData,
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: formData.toString(),
 	})
 		.then((response) => {
 			if (!response.ok) {
-				throw new Error(
-					"Network response was not ok: " + response.statusText
-				);
+				throw new Error("Network response was not ok: "
+                      + response.statusText);
 			}
-			return response.json();
+			return response.text();
 		})
 		.then((data) => {
-			alert(data.message || data.error || "Update completed");
+			try {
+				const jsonData = JSON.parse(data);
+				alert(jsonData.message || "Update completed");
+			} catch (e) {
+				alert(data || "Update completed");
+			}
 			fetchGames();
 		})
 		.catch((error) => {
@@ -178,27 +206,37 @@ function deleteGame(gameId) {
 		return;
 	}
 
-	const row = event.target.closest("tr");
+	const element = event ? event.target : document.querySelector
+          (`button[onclick="deleteGame(${gameId})"]`);
+	const row = element.closest("tr");
 	const gameTitle = row.cells[0].innerText;
 
 	if (confirm(`Are you sure you want to delete "${gameTitle}"?`)) {
-		const formData = new FormData();
+		const formData = new URLSearchParams();
 		formData.append("id", gameId);
+		formData.append("action", "delete");
 
 		fetch(api, {
 			method: "POST",
-			body: formData,
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: formData.toString(),
 		})
 			.then((response) => {
 				if (!response.ok) {
-					throw new Error(
-						"Network response was not ok: " + response.statusText
-					);
+					throw new Error("Network response was not ok: "
+                          + response.statusText);
 				}
-				return response.json();
+				return response.text();
 			})
 			.then((data) => {
-				alert(data.message || data.error || "Deletion completed");
+				try {
+					const jsonData = JSON.parse(data);
+					alert(jsonData.message || "Deletion completed");
+				} catch (e) {
+					alert(data || "Deletion completed");
+				}
 				fetchGames();
 			})
 			.catch((error) => {
@@ -207,18 +245,5 @@ function deleteGame(gameId) {
 			});
 	}
 }
-
-document.addEventListener("click", function (event) {
-	if (
-		event.target.classList.contains("delete-btn") &&
-		!event.target.textContent.includes("Cancel")
-	) {
-		const gameId = event.target.getAttribute("data-id");
-		if (gameId) {
-			event.preventDefault();
-			deleteGame(gameId);
-		}
-	}
-});
 
 window.onload = fetchGames;
