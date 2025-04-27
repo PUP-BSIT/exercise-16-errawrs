@@ -1,4 +1,4 @@
-const API_URL =
+const apiUrl =
 	  "https://www.stackovercash.site/exercise_16/victorioso/rest_api.php";
 
 function submitData() {
@@ -15,7 +15,7 @@ function submitData() {
 		return;
 	}
 
-	fetch(API_URL, {
+	fetch(apiUrl, {
         method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
@@ -37,7 +37,7 @@ function submitData() {
 }
 
 function getData() {
-	fetch(API_URL)
+	fetch(apiUrl)
 	.then((response) => response.text())
 	.then((responseText) => {
         document.querySelector(".table").innerHTML = responseText;
@@ -231,7 +231,7 @@ function saveRow(id) {
 	const body = JSON.stringify({id, song_title, artist_name, release_year,
           genre, song_writer});
 
-	fetch(API_URL, {
+	fetch(apiUrl, {
 		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json",
@@ -255,7 +255,7 @@ function deleteRow(id) {
 
 	const body = JSON.stringify({ id });
 
-	fetch(API_URL, {
+	fetch(apiUrl, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
