@@ -176,7 +176,34 @@ h1 {
     margin-right: 10px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 320px) {
+    body {
+        padding: 5px;
+    }
+    
+    #song_form {
+        padding: 12px;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+
+    th:nth-child(4), 
+    td:nth-child(4), 
+    th:nth-child(5), 
+    td:nth-child(5) {
+        display: none;
+    }
+    
+    td.more-info {
+        text-align: center;
+        padding: 5px;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 425px) {
     body {
         padding: 10px;
     }
@@ -217,7 +244,6 @@ h1 {
         margin: 2px;
     }
     
-    /* Hide genre and songwriter columns */
     th:nth-child(4), 
     td:nth-child(4), 
     th:nth-child(5), 
@@ -225,7 +251,6 @@ h1 {
         display: none;
     }
     
-    /* Add view more button */
     td.more-info {
         text-align: center;
         padding: 5px;
@@ -242,18 +267,17 @@ h1 {
     }
 }
 
-@media (max-width: 320px) {
-    body {
+@media (min-width: 426px) and (max-width: 550px) {
+    th:nth-child(4), 
+    td:nth-child(4), 
+    th:nth-child(5), 
+    td:nth-child(5) {
+        display: none;
+    }
+    
+    td.more-info {
+        text-align: center;
         padding: 5px;
-    }
-    
-    #song_form {
-        padding: 12px;
-    }
-    
-    th, td {
-        padding: 6px 4px;
-        font-size: 12px;
     }
 }
 
