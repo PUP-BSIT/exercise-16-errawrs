@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Anime List Manager</title>
+        <link rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <h1>Anime List Manager</h1>
+
+        <form id="anime_form">
+            <div class="form-row">
+                <input type="text"
+                      id="anime_title"
+                      placeholder="Title"
+                      required/>
+
+                <input type="text"
+                      id="anime_genre"
+                      placeholder="Genre"
+                      required/>
+
+                <input type="number"
+                      id="anime_episodes"
+                      placeholder="Episodes"
+                      required/>
+            </div>
+            <div class="form-row">
+                <input type="text"
+                      id="anime_studio"
+                      placeholder="Studio"
+                      required/>
+
+                <input type="number"
+                      step="0.1"
+                      min="0"
+                      max="10"
+                      id="anime_rating"
+                      placeholder="Rating (0-10)"
+                      required/>
+            </div>
+            <button type="button" onclick="addAnime()">Add Anime</button>
+        </form>
+
+        <h2>Anime List</h2>
+        <ul id="anime_list" class="anime-grid"></ul>
+
+        <!-- Edit Modal Structure -->
+        <div id="edit_modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" 
+                      onclick="closeEditModal()">&times;</span>
+                <h2>Edit Anime</h2>
+                <form id="edit_form">
+                    <input type="hidden" id="edit_id"/>
+                    <div class="form-row">
+                        <input type="text"
+                              id="edit_title"
+                              placeholder="Title"
+                              required/>
+
+                        <input type="text"
+                              id="edit_genre"
+                              placeholder="Genre"
+                              required/>
+                    </div>
+                    <div class="form-row">
+                        <input type="number"
+                              id="edit_episodes"
+                              placeholder="Episodes"
+                              required/>
+
+                        <input type="text"
+                              id="edit_studio"
+                              placeholder="Studio"
+                              required/>
+                    </div>
+                    <div class="form-row">
+                        <input type="number"
+                              step="0.1"
+                              min="0"
+                              max="10"
+                              id="edit_rating"
+                              placeholder="Rating (0-10)"
+                              required/>
+                    </div>
+                    <div class="edit-buttons">
+                        <button type="button"
+                                  onclick="saveEditChanges()"
+                                  class="save-btn">
+                            Save Changes
+                        </button>
+                        <button type="button"
+                                  onclick="closeEditModal()"
+                                  class="cancel-btn">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

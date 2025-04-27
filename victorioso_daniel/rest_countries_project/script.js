@@ -2,6 +2,21 @@ let allCountriesInRegion = [];
 let currentPage = 0;
 const countriesPerPage = 10;
 
+document.addEventListener(
+	"DOMContentLoaded",
+	(handleEnterKey = () => {
+		const inputField = document.querySelector("#search_bar");
+		if (inputField) {
+			inputField.addEventListener("keypress", (event) => {
+				if (event.key === "Enter") {
+					getCountry();
+					inputField.value = "";
+				}
+			});
+		}
+	})
+);
+
 function showResults() {
 	document.querySelector(".container").classList.add("results-shown");
 }
