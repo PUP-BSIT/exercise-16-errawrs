@@ -1,4 +1,4 @@
-const apiUrl = 'api.php';
+const apiUrl = 'https://www.stackovercash.site/exercise_16/reyes/api.php';
 window.onload = function () {
     loadAnime();
 };
