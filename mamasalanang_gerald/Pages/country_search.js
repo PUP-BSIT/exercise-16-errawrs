@@ -61,7 +61,7 @@ function fetchCountryByName(countryName) {
             return response.json();
             })
             .then(data => {
-            if (data.length === 0) {
+            if (!data[0]) {
                 throw new Error('No results found');
             }
             return data[0];
@@ -111,7 +111,7 @@ function displayCountryDetails(country) {
     let currencyText = 'N/A';
     if (country.currencies) {
         let currencyEntries = Object.entries(country.currencies);
-        if (currencyEntries.length > 0) {
+        if (currencyEntries[0]) {
             let [code, details] = currencyEntries[0];
             currencyText = `${details.name} (${details.symbol || code})`;
         }
