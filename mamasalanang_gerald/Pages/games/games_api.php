@@ -25,7 +25,7 @@ switch ($action) {
 
         if ($game_title && $developer &&
               $release_year && $genre && $platform) {
-            $stmt = mysqli_prepare($conn, "INSERT INTO video_games (game_title,
+            $stmt = mysqli_prepare($conn, "INSERT INTO video_game (game_title,
                   developer, release_year, genre, platform)
                   VALUES (?, ?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "ssiss", $game_title, $developer,
@@ -42,7 +42,7 @@ switch ($action) {
         break;
 
     case 'read':
-        $sql = "SELECT * FROM video_games";
+        $sql = "SELECT * FROM video_game";
         $result = mysqli_query($conn, $sql);
         $response = [];
 
@@ -69,7 +69,7 @@ switch ($action) {
         
         if ($original_title && $game_title && $developer && $release_year &&
               $genre && $platform) {
-            $stmt = mysqli_prepare($conn, "UPDATE video_games SET game_title=?,
+            $stmt = mysqli_prepare($conn, "UPDATE video_game SET game_title=?,
                   developer=?, release_year=?, genre=?, platform=? 
                       WHERE game_title=?");
             mysqli_stmt_bind_param($stmt, "ssisss", $game_title, $developer,
@@ -90,7 +90,7 @@ switch ($action) {
         $game_title = $data["game_title"] ?? '';
 
         if ($game_title) {
-            $stmt = mysqli_prepare($conn, "DELETE FROM video_games
+            $stmt = mysqli_prepare($conn, "DELETE FROM video_game
                   WHERE game_title=?");
             mysqli_stmt_bind_param($stmt, "s", $game_title);
 
