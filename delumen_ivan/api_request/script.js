@@ -4,7 +4,7 @@ let year = document.getElementById("year");
 let color = document.getElementById("color");
 let idSelect = null;
 
-const apiUrl = "api.php";
+const apiUrl = 'https://www.stackovercash.site/exercise_16/delumen/api.php';
 
 //Display car
 function loadCars() {
