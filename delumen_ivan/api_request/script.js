@@ -4,7 +4,7 @@ let year = document.getElementById("year");
 let color = document.getElementById("color");
 let idSelect = null;
 
-const apiUrl = "index.php";
+const apiUrl = "api.php";
 
 //Display car
 function loadCars() {
