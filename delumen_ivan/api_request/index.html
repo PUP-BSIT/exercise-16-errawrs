@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Car Creator</h2>
+            <form id="car_form">
+                <div class="form-field">
+                    <label>Model:</label>
+                    <input type="text" id="model">
+                </div>
+                <div class="form-field">
+                    <label>Brand:</label>
+                    <input type="text" id="brand">
+                </div>
+                <div class="form-field">
+                    <label>Year:</label>
+                    <input type="number" id="year">
+                </div>
+                <div class="form-field">
+                    <label>Color:</label>
+                    <input type="text" id="color">
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="createCar()">
+                      Create Car</button>
+                    <button type="button" onclick="updateCar()">
+                      Save Changes</button>
+                </div>
+            </form>
+        </div>
+        <div class="data-container">
+            <h2>Car List</h2>
+            <table id="car_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Year</th>
+                        <th>Color</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="car_list">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
