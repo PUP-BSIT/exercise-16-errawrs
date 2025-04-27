@@ -110,3 +110,96 @@ table th {
     display: flex;
     gap: 5px;
 }
+
+/* Mobile S (max-width: 320px) */
+@media (max-width: 320px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .data-container, 
+    .form-container {
+        width: 90%;
+    }
+
+    #model, #brand, #year, #color {
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Mobile M (321px - 375px) */
+@media (min-width: 321px) and (max-width: 375px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .data-container, 
+    .form-container {
+        width: 90%;
+    }
+
+    #model, #brand, #year, #color {
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Mobile L (376px - 425px) */
+@media (min-width: 376px) and (max-width: 425px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .data-container, 
+    .form-container {
+        width: 90%;
+    }
+
+    #model, #brand, #year, #color {
+        width: 90%;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
