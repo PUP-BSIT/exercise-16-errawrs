@@ -1,4 +1,9 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST, GET, DELETE, PATCH, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 include "db_connection.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
